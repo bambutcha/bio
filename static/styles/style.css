@@ -115,3 +115,13 @@ html,body{
         font-size:16px
     }
 }
+
+button{
+    padding: 20px 30px;
+    border-radius: 25px;
+    background-color: #FF4C60;
+    cursor: pointer;
+    color: #fff;
+    font-family: "Press Start 2P";
+    font-weight: 500;
+}
