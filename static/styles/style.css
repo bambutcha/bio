@@ -109,3 +109,9 @@ html,body{
 .fa-github {
     color: #24292e;
 }
+
+@media(max-width: 530px){
+    .title_text{
+        font-size:16px
+    }
+}
