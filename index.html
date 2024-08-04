@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f87bd8ac7b.js" crossorigin="anonymous"></script>
+    <script src="static/scripts/script.js"></script>
 
 </head>
 <body>
@@ -21,6 +22,10 @@
             <div class="container">
                 <div class="title_menu">
                     <h2 class="title_text">Bambutcha</h2>
+                </div>
+                <div class="views_counter">
+                    <p style="font-size: 8px; margin-bottom: 10px;">Вот столько раз посещали этот сайт: </p>
+                    <img src="https://count.getloli.com/get/@:bambutcha.github.io?theme=rule34" alt=":bambutcha.github.io" />
                 </div>
             </div>
             <div class="container main_content_block">
@@ -42,13 +47,16 @@
                             <i class="fa-brands fa-github"></i>
                         </a>
                     </div>
-                    <button type="button">I'm here</button>
-                    <a class="yacore">Here</a>
+                    <button type="button" onclick="scrollToBlock('target-block')">I'm here</button>
+                    <div class="author">
+                        <p>Created by Bambutcha.</p>
+                        <a class="repo-link"href="https://github.com/bambutcha/bambutcha.github.io">fork this page on GitHub</a>
+                    </div>
                 </div>
             </div>
         </header>
         <main>
-            <p>Пизда</p>
+            <p id="target-block">Пизда</p>
         </main>
     </div>
 </body>

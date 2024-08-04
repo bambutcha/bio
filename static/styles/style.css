@@ -39,8 +39,22 @@ html,body{
     padding: 1.5% 10%; /* Отступ от контейнера внутрь */
 }
 
+.views_counter{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+    opacity: 0.5;
+
+}
+
 .title_text{
-    color: #000;
+    color: white;
+    -webkit-text-stroke: 1px #000;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+
+
 }
 
 .header {
@@ -86,12 +100,15 @@ html,body{
     align-items: center;
     flex-direction: column;
     gap: 25px;
-    padding: 18% 0px 0px 0px;
-    color: #000;
+    padding: 10% 0px 0px 0px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
 }
 
 .fa-brands{
     font-size: 60px;
+    text-shadow: none;
+    text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em white;
 }
 
 .fa-vk{
@@ -123,5 +140,24 @@ button{
     cursor: pointer;
     color: #fff;
     font-family: "Press Start 2P";
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 2px;
+    box-shadow: 0px 5px 10px #000;
+}
+
+.author{
+    padding-top: 1px;
+    text-align: center;
+    font-size: 10px;
+    color: white;
+    margin: auto;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+    opacity: 0.15;
+}
+
+.repo-link{
+    color: white;
+    text-decoration: underline;
 }
