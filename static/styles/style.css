@@ -18,10 +18,23 @@ p {
     margin-inline-end: 0px;
 }
 
+@font-face {
+    font-family: 'Monocraft';
+    src: url('../fonts/Monocraft.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Miracode';
+    src: url('../fonts/Miracode.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 
 html,body{
     height: 100%;
-    font-family: "Press Start 2P", system-ui;
+    font-family: "Monocraft", system-ui;
     font-weight: 400;
     font-style: normal;
 }
@@ -53,8 +66,6 @@ html,body{
     color: white;
     -webkit-text-stroke: 1px #000;
     text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
-
-
 }
 
 .header {
@@ -89,8 +100,8 @@ html,body{
 }
 
 .avatar{
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border-radius: 100px;
 }
 
@@ -154,10 +165,93 @@ button{
     margin: auto;
     letter-spacing: 1px;
     text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
-    opacity: 0.15;
+    opacity: 0.25;
 }
 
 .repo-link{
     color: white;
     text-decoration: underline;
+}
+
+.about_me_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.main_text{
+    font-family: "Miracode", system-ui;
+    font-weight: bold;
+    font-size: 36px;
+    color: #454360;
+    padding: 50px 0px 40px 500px;
+}
+
+body {
+    background-color: #F9F9FF;
+}
+
+.face{
+    width: 150x;
+    height: 150px;
+    border-radius: 100px;
+}
+
+.rectangle_content{
+    background-color: #fff; /* Цвет фона прямоугольника */
+    padding: 30px 32px; /* Внутренние отступы */
+    border-radius: 40px; /* Скругление углов */
+    text-align: left; /* Выравнивание текста по центру */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1), /* Тень снизу */
+                0px -5px 10px rgba(0, 0, 0, 0.1); /* Тень сверху */
+
+    p{
+        font-size: 18px;
+        color: #5E5C7F;
+        letter-spacing: 1px; /* Увеличивает межбуквенный интервал на 1 пиксель */
+        line-height: 20px; /* Увеличивает межстрочный интервал в 1.5 раза */
+        font-family: "Miracode", system-ui;
+    }
+}
+
+.biography{
+    width: 800px; /* Ширина прямоугольника */
+}
+
+.triangle{
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-right: 20px solid #fff;
+    margin-left: 75px;
+    margin-top: 54px;
+    position: relative;
+}
+
+.triangle::after {
+    content: "";
+    position: absolute;
+    top: -20px; /* Смещение тени вверх на высоту границы треугольника */
+    left: -20px; /* Смещение тени вправо на ширину границы треугольника */
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-right: 20px solid rgba(0, 0, 0, 0.08); /* Тень */
+}
+
+.expirience_content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.education{
+    width: 500px;
+    margin-right: 40px;
+}
+
+.work{
+    width: 500px;
 }
