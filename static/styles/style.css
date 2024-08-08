@@ -142,7 +142,115 @@ html,body{
     .title_text{
         font-size:16px
     }
+
+    
 }
+
+@media (max-width: 1920px){
+    .container {
+      padding: 2% 8%;
+    }
+  
+    .views_counter {
+      font-size: 0.9rem;
+    }
+  
+    .title_text {
+      font-size: 1.5rem;
+    }
+  
+    .header {
+      height: 100vh;
+    }
+  
+    .header video {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .avatar {
+      width: 110px;
+      height: 110px;
+    }
+  
+    .infoblock {
+      padding: 9% 0 0 0;
+      gap: 20px;
+    }
+  
+    .fa-brands {
+      font-size: 50px;
+    }
+  
+    button {
+      padding: 18px 26px;
+      border-radius: 22px;
+      font-size: 13px;
+      letter-spacing: 1.8px;
+      box-shadow: 0px 4px 8px #000;
+    }
+  
+    .author {
+      font-size: 9px;
+      letter-spacing: 0.9px;
+    }
+  
+    .main_text {
+      font-size: 34px;
+      padding: 45px 0 35px 450px;
+    }
+  
+    .about_me_content {
+      margin-bottom: 80px;
+    }
+  
+    .face {
+        height: 135px;
+        border-radius: 50%;
+    }
+  
+    .rectangle_content {
+      padding: 25px 28px;
+      border-radius: 35px;
+    }
+  
+    .rectangle_content p {
+      font-size: 16px;
+      letter-spacing: 0.8px;
+      line-height: 18px;
+    }
+  
+    .biography {
+      width: 700px;
+    }
+  
+    .triangle {
+      margin-left: 65px;
+      margin-top: 48px;
+      border-width: 18px;
+      border-right-width: 18px;
+    }
+  
+    .triangle::after {
+      top: -18px;
+      left: -18px;
+      border-width: 18px;
+      border-right-width: 18px;
+    }
+  
+    .expirience_content {
+      margin-bottom: 80px;
+    }
+  
+    .education {
+      width: 450px;
+      margin-right: 35px;
+    }
+  
+    .work {
+      width: 450px;
+    }
+}  
 
 button{
     padding: 20px 30px;
