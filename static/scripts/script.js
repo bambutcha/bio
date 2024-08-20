@@ -4,4 +4,16 @@ function scrollToBlock(blockId) {
       behavior: 'smooth',
       block: 'start'
     });
-  }
+}
+
+
+const audio = document.getElementById("soundPlayer");
+
+const playButton = document.getElementById("soundButton");
+
+playButton.addEventListener("click", function() {
+
+audio.play();
+
+});
+
