@@ -366,15 +366,28 @@ body {
 
 #soundButton {
   position: absolute;
-  top: 1430px; /* Отступ от верхнего края */
-  right: 340px; /* Отступ от правого края */
-  z-index: 1; /* Поднимает кнопку поверх других элементов */
-  padding: 15px 5px;
-  font-size: 5px;
+  top: 1425px;
+  right: 342px;
+  z-index: 1;
+  padding: 8px 8px;
+  font-size: 15px;
   background-color: #0000000a;
   color: black;
   border: none;
   border-radius: 100%;
   cursor: pointer;
   box-shadow: 0px 2px 5px #000;
+  transition: background-color 0.3s, transform 0.3s;
 }
+
+#soundButton.play {
+  background-color: #00ff005b; /* Зеленый цвет при воспроизведении */
+  font-size: 25px;
+  padding: 0px 0px 1.5px 1.5px;
+}
+
+#soundButton:active {
+  transform: scale(0.9); /* Анимация нажатия */
+}
+
+
