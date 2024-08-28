@@ -323,8 +323,11 @@ body {
     }
 }
 
-.biography{
-    width: 800px; /* Ширина прямоугольника */
+.biography {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  position: relative; /* Необходимо, чтобы сделать родителем для абсолютно позиционированного элемента */
 }
 
 .triangle{
@@ -366,8 +369,6 @@ body {
 
 #soundButton {
   position: absolute;
-  top: 1425px;
-  right: 342px;
   z-index: 1;
   padding: 8px 8px;
   font-size: 15px;
@@ -378,6 +379,8 @@ body {
   cursor: pointer;
   box-shadow: 0px 2px 5px #000;
   transition: background-color 0.3s, transform 0.3s;
+  bottom: 20px; /* Позиционируем кнопку снизу */
+  right: 20px; /* Позиционируем кнопку справа */
 }
 
 #soundButton.play {
