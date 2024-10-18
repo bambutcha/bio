@@ -138,6 +138,15 @@ html,body{
     color: #24292e;
 }
 
+.cpp-icon{
+  width: 60px;
+}
+
+.fa-solid {
+    color: #cf7a43;
+    font-size: 60px;
+}
+
 @media(max-width: 530px){
     .title_text{
         font-size:16px
@@ -179,6 +188,10 @@ html,body{
     }
   
     .fa-brands {
+      font-size: 50px;
+    }
+
+    .fa-solid {
       font-size: 50px;
     }
   
@@ -391,4 +404,20 @@ body {
 
 #soundButton:active {
   transform: scale(0.9); /* Анимация нажатия */
+}
+
+.stack_content{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.stack {
+  display: flex;
+  gap: 20px;
+  max-width: 500px;
+  justify-content: left;
+  flex-wrap: wrap;
+
 }
