@@ -52,6 +52,16 @@ html,body{
     padding: 1.5% 10%; /* Отступ от контейнера внутрь */
 }
 
+.main_content_block {
+    max-width: 1500px;
+    margin: 0px auto;
+    padding: 1.5% 10%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
 .views_counter{
     display: flex;
     align-items: flex-end;
@@ -147,14 +157,6 @@ html,body{
     font-size: 60px;
 }
 
-@media(max-width: 530px){
-    .title_text{
-        font-size:16px
-    }
-
-    
-}
-
 @media (max-width: 1920px){
     .container {
       padding: 2% 8%;
@@ -206,7 +208,7 @@ html,body{
     .author {
       font-size: 9px;
       letter-spacing: 0.9px;
-    }
+    
   
     .main_text {
       font-size: 34px;
@@ -263,6 +265,22 @@ html,body{
     .work {
       width: 450px;
     }
+
+    .stack_content{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin-bottom: 100px;
+    }
+    
+    .stack {
+      display: flex;
+      gap: 20px;
+      max-width: 500px;
+      justify-content: left;
+      flex-wrap: wrap;
+    
+    }
 }  
 
 button{
@@ -304,9 +322,10 @@ button{
 .main_text{
     font-family: "Miracode", system-ui;
     font-weight: bold;
-    font-size: 36px;
+    font-size: 40px;
     color: #454360;
-    padding: 50px 0px 40px 500px;
+    padding: 50px 0px 60px 150px;
+    text-align: left;
 }
 
 body {
@@ -314,8 +333,8 @@ body {
 }
 
 .face{
-    width: 150x;
-    height: 150px;
+    width: 180x;
+    height: 180px;
     border-radius: 100px;
 }
 
@@ -328,10 +347,10 @@ body {
                 0px -5px 10px rgba(0, 0, 0, 0.1); /* Тень сверху */
 
     p{
-        font-size: 18px;
+        font-size: 20px;
         color: #5E5C7F;
         letter-spacing: 1px; /* Увеличивает межбуквенный интервал на 1 пиксель */
-        line-height: 20px; /* Увеличивает межстрочный интервал в 1.5 раза */
+        line-height: 25px; /* Увеличивает межстрочный интервал в 1.5 раза */
         font-family: "Miracode", system-ui;
     }
 }
@@ -339,17 +358,16 @@ body {
 .biography {
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width: 1000px;
   position: relative; /* Необходимо, чтобы сделать родителем для абсолютно позиционированного элемента */
 }
 
 .triangle{
     width: 0;
     height: 0;
-    border: 20px solid transparent;
     border-right: 20px solid #fff;
     margin-left: 75px;
-    margin-top: 54px;
+    margin-top: 86px;
     position: relative;
 }
 
@@ -415,9 +433,23 @@ body {
 
 .stack {
   display: flex;
-  gap: 20px;
-  max-width: 500px;
-  justify-content: left;
+  gap: 60px; /* Убедитесь, что это значение вам подходит */
+  max-width: 1020px;
+  justify-content: space-between;
   flex-wrap: wrap;
 
+  .fa-brands {
+    font-size: 80px;
+    margin-right: 0; /* Убедитесь, что здесь нет лишнего отступа */
+  }
+
+  .fa-solid {
+    font-size: 80px;
+    margin-right: 0; /* Убедитесь, что здесь нет лишнего отступа */
+  }
+
+  .cpp-icon {
+    width: 80px;
+    margin-right: 0; /* Убедитесь, что здесь нет лишнего отступа */
+  }
 }
