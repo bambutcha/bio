@@ -535,12 +535,12 @@ body {
   color: var(--jthemes-net-mulled-wine, #000);
 }
 
-.photography-card {
+.backend-card {
   background: var(--jthemes-net-radical-red, #ff4c60);
   box-shadow: 0px 5px 20px 0px rgba(249, 123, 139, 0.5);
 }
 
-.photography-title {
+.backend-title {
   color: var(--jthemes-net-white, #000);
 }
 
