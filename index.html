@@ -3,189 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bambutcha</title>
+    <meta name="description" content="Персональный сайт Даниила Ягольника, начинающего веб-разработчика из Таганрога">
+    <title>Даниил Ягольник | Веб-разработчик</title>
     <link rel="stylesheet" href="static/styles/style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f87bd8ac7b.js" crossorigin="anonymous"></script>
-    <script src="static/scripts/script.js"></script>
-
 </head>
 <body>
     <div class="wrapper">
-        <header class="header">
+        <!-- Кнопка переключения темы -->
+        <div class="theme-switch">
+            <i class="fa-solid fa-moon" id="theme-toggle"></i>
+        </div>
+
+        <!-- Навигация -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h2>Bambutcha</h2>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#projects">Проекты</a></li>
+                    <li><a href="#skills">Навыки</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Шапка -->
+        <header class="header" id="home">
             <video id="bg-video" loop autoplay muted poster="./static/images/luffy-kid.png">
                 <source src="static/images/luffy-kid.mp4" type="video/mp4">
             </video>
             <div class="container">
-                <div class="title_menu_wrapper">
-                    <div class="title_menu">
-                        <h1 class="title_text">Bambutcha</h1>
-                    </div>
-                    <div class="views_counter" style="margin-left: auto;">
-                        <p style="font-size: 10px; margin-bottom: 10px;">Вот столько раз посещали этот сайт:</p>
-                        <img src="https://count.getloli.com/get/@:bambutcha.github.io?theme=rule34" alt=":bambutcha.github.io" />
-                    </div>
-                </div>
-            </div>
-            <div class="container header_content_block">
-                <div class="infoblock">
-                    <img class="avatar" src="static/images/avatar.JPG" alt="avatar">
-                    <h1 class="name">Yagolnik Daniel</h1>
-                    <p class="post" style="font-size: 18px;">I'm begginer Web-developer</p>
-                    <div id="badges" align="center">
-                        <a href="https://vk.com/denandyou">
-                            <i class="fa-brands fa-vk"></i>
-                        </a>
-                        <a href="https://t.me/Alwaysxdroll">
-                            <i class="fa-brands fa-telegram"></i>
-                        </a>
-                        <a href="https://www.youtube.com/channel/UCu2JkadXQ_2BM5_JAjIJzvA">
-                            <i class="fa-brands fa-youtube"></i>
-                        </a>
-                        <a href="https://github.com/bambutcha">
-                            <i class="fa-brands fa-github"></i>
-                        </a>
-                    </div>
-                    <button type="button" onclick="scrollToBlock('target-block')">I'm here</button>
-                    <div class="author">
-                        <p>Created by Bambutcha.</p>
-                        <a class="repo-link"href="https://github.com/bambutcha/bambutcha.github.io">fork this page on GitHub</a>
+                <div class="header_content_block">
+                    <div class="infoblock">
+                        <img class="avatar" src="static/images/avatar.JPG" alt="Фото Даниила Ягольника">
+                        <h1 class="name">Даниил Ягольник</h1>
+                        <p class="post">Начинающий веб-разработчик</p>
+                        <div id="badges">
+                            <a href="https://vk.com/denandyou" aria-label="ВКонтакте">
+                                <i class="fa-brands fa-vk"></i>
+                            </a>
+                            <a href="https://t.me/Alwaysxdroll" aria-label="Telegram">
+                                <i class="fa-brands fa-telegram"></i>
+                            </a>
+                            <a href="https://www.youtube.com/channel/UCu2JkadXQ_2BM5_JAjIJzvA" aria-label="YouTube">
+                                <i class="fa-brands fa-youtube"></i>
+                            </a>
+                            <a href="https://github.com/bambutcha" aria-label="GitHub">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                        </div>
+                        <button type="button" class="primary-btn" onclick="scrollToSection('about')">Узнать больше</button>
+                        <div class="scroll-down">
+                            <span>Прокрути вниз</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
+
+        <!-- Основной контент -->
         <main>
-            <div class="container main_content_block">
-                <p class = "main_text">About Me</p>
-                <div class="about_me_content">
-                    <img class="face" src="static/images/avatar.JPG" alt="avatar">
-                    <div class="triangle"></div>
-                    <div class="rectangle_content biography">
-                        <p>I'm Daniil Yagolnik, an aspiring web developer from Taganrog, Russia.
-                            I have limited experience in website design and development,
-                            but I continue to study this field diligently.
-                        </p>
-                        <br>
-                        <p>I study at Southern Federal University, and in my free time I spend with
-                            friends, program, play volleyball or practice vocals at home.
-                        </p>
-                        <br>
-                        <p>I enjoy making new friends and maintaining relationships.
-                            I value kindness and honesty in people.
-                        </p>
-                        <br>
-                        <p>In the future, I envision myself with a wonderful career (Now I want to become a fullstack developer)
-                            and an equally wonderful environment.
-                        </p>
-                        <audio id="notif" src="static/images/sosat-amerika.mp3"></audio>
-                        <button id="soundButton">🤩</button>
-                    </div>
-                </div>                
-
-                <!--
-                <p class="main_text">Experience</p>
-                <div class="expirience_content">
-                    <div class="rectangle_content education">
-
-                    </div>
-                    <div class="rectangle_content work">
-
+            <!-- О себе -->
+            <section id="about" class="section">
+                <div class="container">
+                    <h2 class="section-title">Обо мне</h2>
+                    <div class="about-content">
+                        <div class="about-img">
+                            <img class="face" src="static/images/avatar.JPG" alt="Фото Даниила Ягольника">
+                        </div>
+                        <div class="about-text">
+                            <p>Я Даниил Ягольник, начинающий веб-разработчик из Таганрога, Россия. У меня есть небольшой опыт в дизайне и разработке веб-сайтов, но я продолжаю усердно учиться в этой области.</p>
+                            
+                            <p>Я учусь в Южном Федеральном Университете, а в свободное время провожу с друзьями, программирую, играю в волейбол или занимаюсь вокалом дома.</p>
+                            
+                            <p>Мне нравится заводить новых друзей и поддерживать отношения. Я ценю доброту и честность в людях.</p>
+                            
+                            <p>В будущем я вижу себя с прекрасной карьерой (сейчас я хочу стать фулстек-разработчиком) и не менее прекрасным окружением.</p>
+                            
+                            <div class="fun-button">
+                                <audio id="notif" src="static/images/sosat-amerika.mp3"></audio>
+                                <button id="soundButton" class="emoji-btn">🤩</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                -->
+            </section>
 
-                <p class="main_text">Services</p>
+            <!-- Услуги -->
+            <section id="services" class="section">
+                <div class="container">
+                    <h2 class="section-title">Услуги</h2>
+                    <div class="services-grid">
+                        <div class="service-card-wrapper">
+                            <div class="service-card design-card">
+                                <div class="service-icon">
+                                    <i class="fa-solid fa-palette"></i>
+                                </div>
+                                <h3 class="service-title">UI/UX дизайн</h3>
+                                <p class="service-description">
+                                    Создаю интуитивно понятные и визуально привлекательные интерфейсы, сочетающие эстетику и функциональность. Провожу исследования пользователей, разрабатываю прототипы и тестирую для обеспечения выдающегося пользовательского опыта.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="service-card-wrapper">
+                            <div class="service-card development-card">
+                                <div class="service-icon">
+                                    <i class="fa-solid fa-code"></i>
+                                </div>
+                                <h3 class="service-title">Frontend-разработка</h3>
+                                <p class="service-description">
+                                    Разрабатываю современные веб-приложения и сайты с использованием HTML, CSS и JavaScript. Обеспечиваю адаптивность, высокую производительность и безопасность, предоставляя наилучший опыт для ваших пользователей.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="service-card-wrapper">
+                            <div class="service-card backend-card">
+                                <div class="service-icon">
+                                    <i class="fa-solid fa-server"></i>
+                                </div>
+                                <h3 class="service-title">Backend-разработка</h3>
+                                <p class="service-description">
+                                    Отвечаю за серверную логику и базы данных веб-приложений. Разрабатываю API, интегрирую системы и обеспечиваю надежность и безопасность бэкенда, позволяя приложению работать бесперебойно и обеспечивая эффективное взаимодействие с пользователем.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                <div class="rectangle_content">
-                    <div class="contant_with_me" id="target-block">
-                        <div class="services-grid">
-                            <div class="service-card-wrapper">
-                              <div class="service-card">
-                                <div class="service-content design-card">
-                                  <img
-                                    loading="lazy"
-                                    src="https://cdn.builder.io/api/v1/image/assets/a54c2ec4900c4e71b001c0d85753e789/f57e19226495a318c45e1b1a8b5c0d629fef17a700804dab0268f4d7ae4baba9?apiKey=a54c2ec4900c4e71b001c0d85753e789&"
-                                    class="service-icon"
-                                    alt="UI/UX Design Service Icon"
-                                  />
-                                  <h2 class="service-title design-title" align="center">UI/UX design</h2>
-                                  <p class="service-description" style="color: #454360;">
-                                    I create intuitive and visually appealing interfaces that combine aesthetics and functionality. I conduct user research, develop prototypes, and conduct testing to deliver an outstanding user experience.
-                                  </p>
-                                </div>
-                              </div>
+            <!-- Проекты (новый раздел) -->
+            <section id="projects" class="section">
+                <div class="container">
+                    <h2 class="section-title">Мои проекты</h2>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <div class="project-img">
+                                <img src="/api/placeholder/400/320" alt="Проект 1">
                             </div>
-                            <div class="service-card-wrapper">
-                              <div class="service-card">
-                                <div class="service-content development-card">
-                                  <img
-                                    loading="lazy"
-                                    src="https://cdn.builder.io/api/v1/image/assets/a54c2ec4900c4e71b001c0d85753e789/d75826452ba020897e2c0698e0181028eebc0a2e7368f967679cfee8a668e8b5?apiKey=a54c2ec4900c4e71b001c0d85753e789&"
-                                    class="service-icon"
-                                    alt="Web Development Service Icon"
-                                  />
-                                  <h2 class="service-title development-title" align="center">Frontend Development</h2>
-                                  <p class="service-description" style="color: #454360;">
-                                    I develop modern web applications and websites using HTML, CSS, and JavaScript. I ensure responsiveness, high performance, and security, providing the best experience for your users.
-                                  </p>
+                            <div class="project-info">
+                                <h3 class="project-title">Персональный блог</h3>
+                                <p class="project-description">Разработка персонального блога с использованием React и Node.js</p>
+                                <div class="project-tags">
+                                    <span>React</span>
+                                    <span>Node.js</span>
+                                    <span>MongoDB</span>
                                 </div>
-                              </div>
-                            </div>
-                            <div class="service-card-wrapper">
-                              <div class="service-card">
-                                <div class="service-content backend-card">
-                                  <img
-                                    loading="lazy"
-                                    src="https://cdn.builder.io/api/v1/image/assets/a54c2ec4900c4e71b001c0d85753e789/d75826452ba020897e2c0698e0181028eebc0a2e7368f967679cfee8a668e8b5?apiKey=a54c2ec4900c4e71b001c0d85753e789&"
-                                    class="service-icon"
-                                    alt="Backend Service Icon"
-                                  />
-                                  <h2 class="service-title backend-title" align="center">Backend Development</h2>
-                                  <p class="service-description" style="color: #454360;">
-                                    I am responsible for the server-side logic and database of web applications. I develop APIs, integrate systems, and ensure the reliability and security of the backend, enabling seamless operation and efficient user interaction.
-                                  </p>
+                                <div class="project-links">
+                                    <a href="#" class="btn-small"><i class="fa-solid fa-eye"></i> Демо</a>
+                                    <a href="#" class="btn-small"><i class="fa-brands fa-github"></i> Код</a>
                                 </div>
-                              </div>
                             </div>
-                          </div>
+                        </div>
                         
-                    </div> 
-                </div>
-                
-                <p class="main_text">My Stack</p>
-                <div class="stack_content">
-                    <div class="rectangle_content">
-                        <h3 class="languages">🖥️ Languages</h3>
-                        <p class="stack">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/C/c1.svg" alt="C">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/C++/c++1.svg" alt="C++">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/CSS/css1.svg" alt="CSS">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/HTML/html2.svg" alt="HTML">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Javascript/javascript3.svg" alt="JavaScript">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/PHP/php1.svg" alt="PHP">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Python/python3.svg" alt="Python">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Go/go2.svg" alt="Golang">
-                        </p>
-                        <h3 class="frameworks-tools" style="margin: 40px 0px 20px 0px;">🔧 Frameworks / Tools</h3>
-                        <p class="stack">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Docker/docker1.svg" alt="Docker">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/React/react1.svg" alt="React">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Git/git1.svg" alt="Git">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/PostgreSQL/postgresql1.svg" alt="PostgreSQL">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/MySQL/mysql1.svg" alt="MySQL">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Bootstrap/bootstrap1.svg" alt="Bootstrap">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Linux/linux3.svg" alt="Linux">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Windows/windows1.svg" alt="Windows">
-                            <img src="https://ziadoua.github.io/m3-Markdown-Badges/badges/Photoshop/photoshop1.svg" alt="Photoshop">
-                        </p>
+                        <div class="project-card">
+                            <div class="project-img">
+                                <img src="/api/placeholder/400/320" alt="Проект 2">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title">Погодное приложение</h3>
+                                <p class="project-description">Приложение для отслеживания погоды с использованием API и JavaScript</p>
+                                <div class="project-tags">
+                                    <span>JavaScript</span>
+                                    <span>API</span>
+                                    <span>CSS3</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="btn-small"><i class="fa-solid fa-eye"></i> Демо</a>
+                                    <a href="#" class="btn-small"><i class="fa-brands fa-github"></i> Код</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-            </div>
+            <!-- Навыки -->
+            <section id="skills" class="section">
+                <div class="container">
+                    <h2 class="section-title">Мои навыки</h2>
+                    <div class="skills-container">
+                        <div class="skills-box">
+                            <h3 class="skills-title">🖥️ Языки</h3>
+                            <div class="stack">
+                                <div class="skill-badge">C</div>
+                                <div class="skill-badge">C++</div>
+                                <div class="skill-badge">CSS</div>
+                                <div class="skill-badge">HTML</div>
+                                <div class="skill-badge">JavaScript</div>
+                                <div class="skill-badge">PHP</div>
+                                <div class="skill-badge">Python</div>
+                                <div class="skill-badge">Go</div>
+                            </div>
+                            
+                            <h3 class="skills-title">🔧 Фреймворки / Инструменты</h3>
+                            <div class="stack">
+                                <div class="skill-badge">Docker</div>
+                                <div class="skill-badge">React</div>
+                                <div class="skill-badge">Git</div>
+                                <div class="skill-badge">PostgreSQL</div>
+                                <div class="skill-badge">MySQL</div>
+                                <div class="skill-badge">MongoDB</div>
+                                <div class="skill-badge">SQLLite</div>
+                                <div class="skill-badge">Bootstrap</div>
+                                <div class="skill-badge">Linux</div>
+                                <div class="skill-badge">Windows</div>
+                                <div class="skill-badge">Photoshop</div>
+                                <div class="skill-badge">Figma</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Контакты (новый раздел) -->
+            <section id="contact" class="section">
+                <div class="container">
+                    <h2 class="section-title">Связаться со мной</h2>
+                    <div class="contact-container">
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fa-solid fa-envelope"></i>
+                                <p>yagadanaga@yandex.ru</p>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <p>Таганрог, Россия</p>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fa-solid fa-phone"></i>
+                                <p>+7 (919) 899-29-85</p>
+                            </div>
+                            <div class="social-links">
+                                <a href="https://vk.com/denandyou"><i class="fa-brands fa-vk"></i></a>
+                                <a href="https://t.me/Alwaysxdroll"><i class="fa-brands fa-telegram"></i></a>
+                                <a href="https://github.com/bambutcha"><i class="fa-brands fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="contact-form">
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" id="email" name="email" placeholder="Ваш Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="subject" name="subject" placeholder="Тема">
+                                </div>
+                                <div class="form-group">
+                                    <textarea id="message" name="message" placeholder="Ваше сообщение" required></textarea>
+                                </div>
+                                <button type="submit" class="primary-btn">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
+
+        <!-- Подвал -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p>© 2025 Даниил Ягольник. Все права защищены.</p>
+                    <p>Создано с <i class="fa-solid fa-heart"></i> by Bambutcha</p>
+                    <a href="https://github.com/bambutcha/bambutcha.github.io" class="repo-link">Форкните этот сайт на GitHub</a>
+                </div>
+            </div>
+        </footer>
     </div>
+
+    <!-- Кнопка возврата наверх -->
+    <button id="back-to-top" aria-label="Вернуться наверх">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Счетчик посещений (сохранен) -->
+    <div class="views-counter" style="display: none;">
+        <p>Вот столько раз посещали этот сайт:</p>
+        <img src="https://count.getloli.com/get/@:bambutcha.github.io?theme=rule34" alt=":bambutcha.github.io" />
+    </div>
+
+    <script src="static/scripts/script.js"></script>
 </body>
 </html>
