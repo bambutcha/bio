@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (result.success) {
           const email = document.getElementById('email').value;
           if (email === 'yagadanaga@yandex.ru' || email === 'yagadanaga@ya.ru') {
-              showNotification('Имя почты не должно совпадать с именем почты автора!', 'info');
+              showNotification('Имя почты не должно совпадать с именем почты автора!', 'error');
               contactForm.reset();
           } else {
               showNotification('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.', 'success');

@@ -76,7 +76,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if form.Name == "yagadanaga@yandex.ru" || form.Name == "yagadanaga@ya.ru" {
+	if form.Email == "yagadanaga@yandex.ru" || form.Email == "yagadanaga@ya.ru" {
 		sendJSONResponse(w, false, "Имя почты не должно совпадать с именем почты автора", http.StatusBadRequest)
 		return
 	}
