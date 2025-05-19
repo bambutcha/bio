@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"net/smtp"
 	"os"
-	"strings"
 	"time"
+	"mime"
 )
 
 // ContactForm представляет данные с формы контактов
@@ -46,16 +46,6 @@ func enableCORS(next http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
-func encodeSubject(subject string) string {
-	var encoded bytes.Buffer
-	w := quotedprintable.NewWriter(&encoded)
-	w.Write([]byte(subject))
-	w.Close()
-	
-	return fmt.Sprintf("=?UTF-8?Q?%s?=", 
-		strings.ReplaceAll(encoded.String(), " ", "_"))
-}
-
 // pingHandler отвечает на запрос для проверки работоспособности сервера
 func pingHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -68,31 +58,30 @@ func pingHandler(w http.ResponseWriter, r *http.Request) {
 
 // contactHandler обрабатывает запросы с формы контактов
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
+    if r.Method != "POST" {
+        http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+        return
+    }
 
-	var form ContactForm
-	decoder := json.NewDecoder(r.Body)
-	if err := decoder.Decode(&form); err != nil {
-		log.Printf("Error decoding request: %v", err)
-		sendJSONResponse(w, false, "Некорректный формат запроса", http.StatusBadRequest)
-		return
-	}
+    var form ContactForm
+    if err := json.NewDecoder(r.Body).Decode(&form); err != nil {
+        log.Printf("Error decoding request: %v", err)
+        sendJSONResponse(w, false, "Некорректный формат запроса", http.StatusBadRequest)
+        return
+    }
 
-	// Простая валидация
-	if form.Name == "" || form.Email == "" || form.Message == "" {
-		sendJSONResponse(w, false, "Пожалуйста, заполните все обязательные поля", http.StatusBadRequest)
-		return
-	}
+    // Простая Валидация
+    if form.Name == "" || form.Email == "" || form.Message == "" {
+        sendJSONResponse(w, false, "Пожалуйста, заполните все обязательные поля", http.StatusBadRequest)
+        return
+    }
 
-	// Получаем настройки SMTP из переменных окружения
-	smtpServer := os.Getenv("SMTP_SERVER")
-	smtpPort := os.Getenv("SMTP_PORT")
-	smtpUser := os.Getenv("SMTP_USER")
-	smtpPass := os.Getenv("SMTP_PASS")
-	toEmail := os.Getenv("TO_EMAIL")
+    // Получение конфигурации SMTP
+    smtpServer := os.Getenv("SMTP_SERVER")
+    smtpPort := os.Getenv("SMTP_PORT")
+    smtpUser := os.Getenv("SMTP_USER")
+    smtpPass := os.Getenv("SMTP_PASS")
+    toEmail := os.Getenv("TO_EMAIL")
 
 	if smtpServer == "" || smtpPort == "" || smtpUser == "" || smtpPass == "" || toEmail == "" {
 		log.Println("Missing SMTP configuration")
@@ -100,109 +89,92 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Формируем сообщение
-	subject := form.Subject
-	if subject == "" {
-		subject = "Новое сообщение с сайта"
-	}
+    // Формирование письма с правильными заголовками
+    subject := "Новое сообщение с сайта"
+    if form.Subject != "" {
+        subject = form.Subject
+    }
 
-	mailBody := fmt.Sprintf(
-		"Имя: %s\nEmail: %s\n\n%s",
-		form.Name,
-		form.Email,
-		form.Message,
-	)
+    // Формируем MIME-совместимое письмо
+    var msg bytes.Buffer
+    msg.WriteString("From: " + smtpUser + "\r\n")
+    msg.WriteString("To: " + toEmail + "\r\n")
+    msg.WriteString("Subject: " + mime.QEncoding.Encode("UTF-8", subject) + "\r\n")
+    msg.WriteString("Reply-To: " + form.Email + "\r\n")
+    msg.WriteString("MIME-Version: 1.0\r\n")
+    msg.WriteString("Content-Type: text/plain; charset=\"UTF-8\"\r\n")
+    msg.WriteString("Content-Transfer-Encoding: quoted-printable\r\n")
+    msg.WriteString("Date: " + time.Now().Format(time.RFC1123Z) + "\r\n")
+    msg.WriteString("\r\n") // Пустая строка между заголовками и телом
 
-	var body bytes.Buffer
-	body.WriteString(fmt.Sprintf("From: %s\r\n", smtpUser))
-	body.WriteString(fmt.Sprintf("To: %s\r\n", toEmail))
-	body.WriteString(fmt.Sprintf("Subject: %s\r\n", subject))
-	body.WriteString(fmt.Sprintf("Reply-To: %s\r\n", form.Email))
-	body.WriteString("MIME-Version: 1.0\r\n")
-	body.WriteString("Content-Type: text/plain; charset=\"UTF-8\"\r\n")
-	body.WriteString("Content-Transfer-Encoding: quoted-printable\r\n")
-	body.WriteString(fmt.Sprintf("Date: %s\r\n", time.Now().Format(time.RFC1123Z)))
-	body.WriteString("\r\n")
+    // Кодируем тело письма
+    qp := quotedprintable.NewWriter(&msg)
+    qp.Write([]byte(fmt.Sprintf(
+        "Имя: %s\nEmail: %s\n\n%s",
+        form.Name,
+        form.Email,
+        form.Message,
+    )))
+    qp.Close()
 
-	qpWriter := quotedprintable.NewWriter(&body)
-	qpWriter.Write([]byte(mailBody))
-	qpWriter.Close()
+    // Отправка через TLS
+    tlsConfig := &tls.Config{
+        ServerName: smtpServer,
+    }
 
-	message := body.Bytes()
+    conn, err := tls.Dial("tcp", smtpServer+":"+smtpPort, tlsConfig)
+    if err != nil {
+        log.Printf("TLS connection error: %v", err)
+        sendJSONResponse(w, false, "Ошибка подключения к серверу", http.StatusInternalServerError)
+        return
+    }
+    defer conn.Close()
 
-	// Настраиваем SMTP аутентификацию
-	auth := smtp.PlainAuth("", smtpUser, smtpPass, smtpServer)
+    client, err := smtp.NewClient(conn, smtpServer)
+    if err != nil {
+        log.Printf("SMTP client error: %v", err)
+        sendJSONResponse(w, false, "Ошибка создания SMTP клиента", http.StatusInternalServerError)
+        return
+    }
+    defer client.Close()
 
-	// Отправляем email
-	var err error
-	if smtpPort == "465" {
-		// Для портов SSL (465) - Яндекс использует этот порт
-		tlsConfig := &tls.Config{
-			InsecureSkipVerify: false,
-			ServerName:         smtpServer,
-		}
-		conn, dialErr := tls.Dial("tcp", fmt.Sprintf("%s:%s", smtpServer, smtpPort), tlsConfig)
-		if dialErr != nil {
-			log.Printf("Failed to dial SMTP server: %v", dialErr)
-			sendJSONResponse(w, false, "Не удалось подключиться к SMTP серверу", http.StatusInternalServerError)
-			return
-		}
-		defer conn.Close()
-		
-		client, clientErr := smtp.NewClient(conn, smtpServer)
-		if clientErr != nil {
-			log.Printf("Failed to create SMTP client: %v", clientErr)
-			sendJSONResponse(w, false, "Не удалось создать SMTP клиент", http.StatusInternalServerError)
-			return
-		}
-		defer client.Close()
-		
-		if authErr := client.Auth(auth); authErr != nil {
-			log.Printf("SMTP authentication failed: %v", authErr)
-			sendJSONResponse(w, false, "Ошибка аутентификации SMTP", http.StatusInternalServerError)
-			return
-		}
-		
-		if fromErr := client.Mail(smtpUser); fromErr != nil {
-			log.Printf("Failed to set sender: %v", fromErr)
-			sendJSONResponse(w, false, "Ошибка установки отправителя", http.StatusInternalServerError)
-			return
-		}
-		
-		if rcptErr := client.Rcpt(toEmail); rcptErr != nil {
-			log.Printf("Failed to set recipient: %v", rcptErr)
-			sendJSONResponse(w, false, "Ошибка установки получателя", http.StatusInternalServerError)
-			return
-		}
-		
-		wc, dataErr := client.Data()
-		if dataErr != nil {
-			log.Printf("Failed to start data command: %v", dataErr)
-			sendJSONResponse(w, false, "Ошибка запуска команды данных", http.StatusInternalServerError)
-			return
-		}
-		defer wc.Close()
-		
-		_, err = wc.Write(message)
-	} else {
-		// Для портов TLS (587, 25, etc.)
-		err = smtp.SendMail(
-			fmt.Sprintf("%s:%s", smtpServer, smtpPort),
-			auth,
-			smtpUser,
-			[]string{toEmail},
-			message,
-		)
-	}
+    // Аутентификация
+    auth := smtp.PlainAuth("", smtpUser, smtpPass, smtpServer)
+    if err := client.Auth(auth); err != nil {
+        log.Printf("SMTP auth error: %v", err)
+        sendJSONResponse(w, false, "Ошибка аутентификации", http.StatusInternalServerError)
+        return
+    }
 
-	if err != nil {
-		log.Printf("Failed to send email: %v", err)
-		sendJSONResponse(w, false, "Не удалось отправить email", http.StatusInternalServerError)
-		return
-	}
+    // Установка отправителя и получателя
+    if err := client.Mail(smtpUser); err != nil {
+        log.Printf("Mail from error: %v", err)
+        sendJSONResponse(w, false, "Ошибка установки отправителя", http.StatusInternalServerError)
+        return
+    }
 
-	// Успешный ответ
-	sendJSONResponse(w, true, "Сообщение успешно отправлено", http.StatusOK)
+    if err := client.Rcpt(toEmail); err != nil {
+        log.Printf("Rcpt to error: %v", err)
+        sendJSONResponse(w, false, "Ошибка установки получателя", http.StatusInternalServerError)
+        return
+    }
+
+    // Отправка данных
+    wc, err := client.Data()
+    if err != nil {
+        log.Printf("Data command error: %v", err)
+        sendJSONResponse(w, false, "Ошибка подготовки данных", http.StatusInternalServerError)
+        return
+    }
+    defer wc.Close()
+
+    if _, err := wc.Write(msg.Bytes()); err != nil {
+        log.Printf("Write error: %v", err)
+        sendJSONResponse(w, false, "Ошибка отправки письма", http.StatusInternalServerError)
+        return
+    }
+
+    sendJSONResponse(w, true, "Сообщение успешно отправлено", http.StatusOK)
 }
 
 // sendJSONResponse отправляет форматированный JSON ответ
