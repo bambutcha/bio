@@ -205,15 +205,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const response = await fetch('https://bambutcha-contact-form.onrender.com/api/contact', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            subject: document.getElementById('subject')?.value || '',
-            message: document.getElementById('message').value
+              name: document.getElementById('name').value,
+              email: document.getElementById('email').value.toLowerCase(), // Приводим к нижнему регистру
+              subject: document.getElementById('subject')?.value || '',
+              message: document.getElementById('message').value
           })
-        });
+      });
         
         const endTime = new Date().getTime();
         const requestTime = endTime - startTime;
@@ -226,17 +226,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const result = await response.json();
         
-        if (result.success) {
-          showNotification('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.', 'success');
-          contactForm.reset();
-        } else {
-            if (result.message === "email_not_allowed") {
-                showNotification('Имя почты не должно совпадать с именем почты автора!', 'error');
-                contactForm.reset();
-            } else {
-                showNotification(result.message || 'Ошибка отправки сообщения', 'error');
-            }
-        }
+        if (!response.ok) {
+          if (result.message === "email_not_allowed") {
+              showNotification('Имя почты не должно совпадать с именем почты автора!', 'error');
+              contactForm.reset();
+          } else {
+              showNotification(result.message || 'Ошибка отправки сообщения', 'error');
+          }
+          return;
+      }
+      
+        showNotification('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.', 'success');
+        contactForm.reset();
       } catch (error) {
         clearTimeout(timeoutId);
         console.error('Ошибка:', error);

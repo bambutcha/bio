@@ -79,7 +79,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 	email := strings.ToLower(form.Email)
 	if email == "yagadanaga@yandex.ru" || email == "yagadanaga@ya.ru" {
-		sendJSONResponse(w, false, "email_not_allowed", http.StatusBadRequest)
+		sendJSONResponse(w, false, "email_not_allowed", http.StatusForbidden)
 		return
 	}
 
