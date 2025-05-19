@@ -70,11 +70,14 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Переключение темы
   const themeToggle = document.getElementById('theme-toggle');
+  const themeSwitch = document.querySelector('.theme-switch');
   
-  if (themeToggle) {
-    console.log('Кнопка переключения темы найдена');
-    themeToggle.addEventListener('click', function() {
-      console.log('Переключение темы');
+  if (themeSwitch && themeToggle) {
+    console.log('Элементы переключения темы найдены');
+    
+    // Добавляем обработчик на весь контейнер кнопки
+    themeSwitch.addEventListener('click', function() {
+      console.log('Клик по кнопке переключения темы');
       const body = document.body;
       body.classList.toggle('dark-theme');
       
@@ -97,8 +100,9 @@ document.addEventListener('DOMContentLoaded', function() {
       themeToggle.classList.add('fa-sun');
     }
   } else {
-    console.error('Кнопка переключения темы не найдена');
+    console.error('Элементы переключения темы не найдены', { themeToggle, themeSwitch });
   }
+
   
   // Мобильное меню
   const hamburger = document.querySelector('.hamburger');
