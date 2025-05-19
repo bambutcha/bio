@@ -99,7 +99,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
     var msg bytes.Buffer
     msg.WriteString("From: " + smtpUser + "\r\n")
     msg.WriteString("To: " + toEmail + "\r\n")
-    msg.WriteString("Subject: " + mime.QEncoding.Encode("UTF-8", subject) + "\r\n")
+    msg.WriteString("Subject: " + "[Bambutcha]" + mime.QEncoding.Encode("UTF-8", subject) + "\r\n")
     msg.WriteString("Reply-To: " + form.Email + "\r\n")
     msg.WriteString("MIME-Version: 1.0\r\n")
     msg.WriteString("Content-Type: text/plain; charset=\"UTF-8\"\r\n")
