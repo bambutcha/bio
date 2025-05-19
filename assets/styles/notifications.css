@@ -1,0 +1,54 @@
+/* Стили для уведомлений */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--card-bg, #ffffff);
+    color: var(--text-color, #333333);
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: var(--transition);
+    max-width: 400px;
+  }
+  
+  .notification.success {
+    border-left: 5px solid var(--primary-color, #FF4C60);
+  }
+  
+  .notification.error {
+    border-left: 5px solid #ff3b30;
+  }
+  
+  .notification.info {
+    border-left: 5px solid #007aff;
+  }
+  
+  .notification.hidden {
+    transform: translateY(100px);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .notification-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .notification-close {
+    background: none;
+    border: none;
+    color: var(--text-color, #333333);
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 15px;
+  }
+  
+  /* Стили для кнопки при отправке */
+  #contactForm button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
