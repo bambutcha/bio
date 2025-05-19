@@ -10,7 +10,7 @@ function scrollToSection(sectionId) {
 }
 
 // Функция для отображения уведомлений
-function showNotification(message, isSuccess = true) {
+function showNotification(message, type = 'success') {
   // Проверяем, существует ли уже элемент уведомления
   let notification = document.getElementById('notification');
   
@@ -44,8 +44,8 @@ function showNotification(message, isSuccess = true) {
   const notificationMessage = document.getElementById('notification-message');
   
   // Обновляем классы и текст
-  notification.classList.remove('hidden', 'success', 'error');
-  notification.classList.add(isSuccess ? 'success' : 'error');
+  notification.classList.remove('hidden', 'success', 'error', 'info');
+  notification.classList.add(type); // type может быть 'success', 'error' или 'info'
   notificationMessage.textContent = message;
   
   // Автоматическое закрытие через 5 секунд
@@ -227,15 +227,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const result = await response.json();
         
         if (result.success) {
-          showNotification('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.', true);
+          showNotification('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.', 'success');
           contactForm.reset();
         } else {
-          showNotification(result.message || 'Ошибка отправки сообщения', false);
+          showNotification(result.message || 'Ошибка отправки сообщения', 'error');
         }
       } catch (error) {
         clearTimeout(timeoutId);
         console.error('Ошибка:', error);
-        showNotification('Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте снова позже.', false);
+        showNotification('Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте снова позже.', 'error');
       } finally {
         // Восстанавливаем состояние кнопки
         submitButton.textContent = originalText;
