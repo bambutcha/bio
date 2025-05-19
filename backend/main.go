@@ -1,13 +1,16 @@
 package main
 
 import (
+	"bytes"
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"log"
+	"mime/quotedprintable"
 	"net/http"
 	"net/smtp"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -41,6 +44,16 @@ func enableCORS(next http.HandlerFunc) http.HandlerFunc {
 
 		next(w, r)
 	}
+}
+
+func encodeSubject(subject string) string {
+	var encoded bytes.Buffer
+	w := quotedprintable.NewWriter(&encoded)
+	w.Write([]byte(subject))
+	w.Close()
+	
+	return fmt.Sprintf("=?UTF-8?Q?%s?=", 
+		strings.ReplaceAll(encoded.String(), " ", "_"))
 }
 
 // pingHandler отвечает на запрос для проверки работоспособности сервера
@@ -100,20 +113,22 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		form.Message,
 	)
 
-	// Формируем email в соответствии с RFC 822
-	message := []byte(fmt.Sprintf(
-		"From: %s\r\n"+
-			"To: %s\r\n"+
-			"Subject: %s\r\n"+
-			"Reply-To: %s\r\n"+
-			"\r\n"+
-			"%s",
-		smtpUser,
-		toEmail,
-		subject,
-		form.Email,
-		mailBody,
-	))
+	var body bytes.Buffer
+	body.WriteString(fmt.Sprintf("From: %s\r\n", smtpUser))
+	body.WriteString(fmt.Sprintf("To: %s\r\n", toEmail))
+	body.WriteString(fmt.Sprintf("Subject: %s\r\n", subject))
+	body.WriteString(fmt.Sprintf("Reply-To: %s\r\n", form.Email))
+	body.WriteString("MIME-Version: 1.0\r\n")
+	body.WriteString("Content-Type: text/plain; charset=\"UTF-8\"\r\n")
+	body.WriteString("Content-Transfer-Encoding: quoted-printable\r\n")
+	body.WriteString(fmt.Sprintf("Date: %s\r\n", time.Now().Format(time.RFC1123Z)))
+	body.WriteString("\r\n")
+
+	qpWriter := quotedprintable.NewWriter(&body)
+	qpWriter.Write([]byte(mailBody))
+	qpWriter.Close()
+
+	message := body.Bytes()
 
 	// Настраиваем SMTP аутентификацию
 	auth := smtp.PlainAuth("", smtpUser, smtpPass, smtpServer)
