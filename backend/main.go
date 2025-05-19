@@ -76,6 +76,11 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if form.Name == "yagadanaga@yandex.ru" || form.Name == "yagadanaga@ya.ru" {
+		sendJSONResponse(w, false, "Имя почты не должно совпадать с именем почты автора", http.StatusBadRequest)
+		return
+	}
+
 	// Получаем настройки SMTP
 	smtpServer := os.Getenv("SMTP_SERVER")
 	smtpPort := os.Getenv("SMTP_PORT")
