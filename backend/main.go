@@ -12,6 +12,7 @@ import (
 	"net/smtp"
 	"os"
 	"time"
+	"strings"
 )
 
 // ContactForm представляет данные с формы контактов
@@ -76,8 +77,9 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if form.Email == "yagadanaga@yandex.ru" || form.Email == "yagadanaga@ya.ru" {
-		sendJSONResponse(w, false, "Имя почты не должно совпадать с именем почты автора", http.StatusBadRequest)
+	email := strings.ToLower(form.Email)
+	if email == "yagadanaga@yandex.ru" || email == "yagadanaga@ya.ru" {
+		sendJSONResponse(w, false, "email_not_allowed", http.StatusBadRequest)
 		return
 	}
 

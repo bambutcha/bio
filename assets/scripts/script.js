@@ -227,16 +227,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const result = await response.json();
         
         if (result.success) {
-          const email = document.getElementById('email').value;
-          if (email === 'yagadanaga@yandex.ru' || email === 'yagadanaga@ya.ru') {
-              showNotification('Имя почты не должно совпадать с именем почты автора!', 'error');
-              contactForm.reset();
-          } else {
-              showNotification('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.', 'success');
-              contactForm.reset();
-          }
+          showNotification('Спасибо за сообщение! Я свяжусь с вами в ближайшее время.', 'success');
+          contactForm.reset();
         } else {
-            showNotification(result.message || 'Ошибка отправки сообщения', 'error');
+            if (result.message === "email_not_allowed") {
+                showNotification('Имя почты не должно совпадать с именем почты автора!', 'error');
+                contactForm.reset();
+            } else {
+                showNotification(result.message || 'Ошибка отправки сообщения', 'error');
+            }
         }
       } catch (error) {
         clearTimeout(timeoutId);
