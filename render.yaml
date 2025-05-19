@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: contact-form-backend
+    env: go
+    buildCommand: cd backend && go build -o server
+    startCommand: cd backend && ./server
+    repo: https://github.com/bambutcha/bambutcha.github.io
+    branch: main
+    rootDir: backend
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: SMTP_SERVER
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: TO_EMAIL
+        sync: false
