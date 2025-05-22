@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Фоновый градиент -->
+  <defs>
+    <!-- Основной градиент -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7851A9;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FF4C60;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6C6CE5;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Градиент для текста -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE066;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F9D74C;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Тень -->
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.3"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Свечение -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Фон с закругленными углами -->
+  <rect x="32" y="32" width="448" height="448" rx="96" ry="96" fill="url(#bgGradient)" filter="url(#shadow)"/>
+  
+  <!-- Декоративные элементы - пиксели в стиле ретро-игр -->
+  <g opacity="0.3">
+    <rect x="64" y="64" width="32" height="32" fill="#FFFFFF"/>
+    <rect x="416" y="64" width="32" height="32" fill="#FFFFFF"/>
+    <rect x="64" y="416" width="32" height="32" fill="#FFFFFF"/>
+    <rect x="416" y="416" width="32" height="32" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- Буква B в пиксельном стиле -->
+  <g filter="url(#glow)">
+    <!-- Основа буквы B -->
+    <path d="
+      M 160 160
+      L 160 352
+      L 288 352
+      Q 352 352 352 304
+      Q 352 272 320 256
+      Q 352 240 352 208
+      Q 352 160 288 160
+      L 160 160
+      Z
+      
+      M 208 208
+      L 272 208
+      Q 304 208 304 232
+      Q 304 256 272 256
+      L 208 256
+      L 208 208
+      Z
+      
+      M 208 304
+      L 272 304
+      Q 304 304 304 280
+      Q 304 256 272 256
+      L 208 256
+      L 208 304
+      Z
+    " fill="url(#textGradient)" stroke="#FFFFFF" stroke-width="8"/>
+  </g>
+  
+  <!-- Дополнительные декоративные пиксели -->
+  <g opacity="0.5">
+    <rect x="96" y="96" width="16" height="16" fill="#FFE066"/>
+    <rect x="128" y="112" width="16" height="16" fill="#FF4C60"/>
+    <rect x="368" y="96" width="16" height="16" fill="#6C6CE5"/>
+    <rect x="400" y="112" width="16" height="16" fill="#F9D74C"/>
+    
+    <rect x="96" y="384" width="16" height="16" fill="#F9D74C"/>
+    <rect x="128" y="368" width="16" height="16" fill="#6C6CE5"/>
+    <rect x="368" y="384" width="16" height="16" fill="#FF4C60"/>
+    <rect x="400" y="368" width="16" height="16" fill="#FFE066"/>
+  </g>
+  
+  <!-- Анимация мерцания для пикселей -->
+  <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite" />
+</svg>

@@ -1,0 +1,39 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Тонкая тень -->
+    <filter id="subtleShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  
+  <!-- Белый фон -->
+  <rect width="512" height="512" rx="102" fill="#FFFFFF"/>
+  
+  <!-- Буква B -->
+  <path d="
+    M 128 128
+    L 128 384
+    L 272 384
+    C 352 384 400 344 400 288
+    C 400 248 376 216 336 200
+    C 368 184 384 152 384 120
+    C 384 64 336 32 256 32
+    L 128 32
+    Z
+    
+    M 208 96
+    L 256 96
+    C 296 96 312 112 312 140
+    C 312 168 296 184 256 184
+    L 208 184
+    Z
+    
+    M 208 248
+    L 272 248
+    C 312 248 328 264 328 292
+    C 328 320 312 336 272 336
+    L 208 336
+    Z
+  " fill="#7851A9" transform="translate(0, 48)" filter="url(#subtleShadow)"/>
+</svg>
