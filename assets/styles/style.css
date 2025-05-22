@@ -796,27 +796,46 @@ a {
     color: var(--secondary-color);
 }
 
-/* Счетчик просмотров */
+/* Счетчик просмотров - круглая кнопка с глазом */
 .views-counter {
     position: fixed;
-    bottom: 20px;
+    bottom: 20px; /* Размещаем выше других кнопок */
     left: 20px;
     z-index: 999;
-    background-color: var(--card-bg);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    font-size: 0.8rem;
-    color: var(--light-text);
+    
+    /* Круглая кнопка-глаз */
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgba(var(--primary-color-rgb, 255, 76, 96), 0.7);
+    backdrop-filter: blur(10px);
+    
+    /* Центрирование иконки */
     display: flex;
-    flex-direction: column;
     align-items: center;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
+    justify-content: center;
+    
+    /* Анимации и эффекты */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    
+    /* Убираем старые стили */
+    padding: 0;
+    font-size: 0;
+    color: transparent;
+    overflow: visible;
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-.views-counter:hover {
-    opacity: 1;
+/* Иконка глаза */
+.views-counter::before {
+    content: '\f06e'; /* FontAwesome eye icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 18px;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Улучшенные стили для всех карточек проектов */
@@ -828,6 +847,111 @@ a {
     box-shadow: var(--shadow);
     transition: all 0.4s ease;
     margin-bottom: 30px;
+}
+
+/* Эффект при наведении на кнопку */
+.views-counter:hover {
+    transform: scale(1.1);
+    background-color: var(--primary-color);
+    box-shadow: 0 6px 20px rgba(var(--primary-color-rgb, 255, 76, 96), 0.4);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Блок с информацией о просмотрах */
+.views-counter-info {
+    position: absolute;
+    bottom: 55px; /* Позиционируем над кнопкой */
+    left: 0;
+    
+    /* Стили блока */
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    
+    /* Размеры и позиционирование */
+    white-space: nowrap;
+    min-width: 200px;
+    
+    /* Скрытие по умолчанию */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.9);
+    
+    /* Плавная анимация */
+    transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: bottom left;
+    
+    /* Бордер для темной темы */
+    border: 1px solid rgba(var(--primary-color-rgb, 255, 76, 96), 0.2);
+}
+
+/* Стрелочка, указывающая на кнопку */
+.views-counter-info::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(var(--primary-color-rgb, 255, 76, 96), 0.2);
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+/* Появление блока при наведении */
+.views-counter:hover .views-counter-info {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+/* Стили текста внутри блока */
+.views-counter-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--light-text);
+    margin-bottom: 8px;
+}
+
+.views-counter-info img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+/* Альтернативный вариант с текстовым счетчиком */
+.views-counter-number {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 4px;
+}
+
+.views-counter:active {
+    transform: scale(0.95);
+}
+
+/* Пульсирующий эффект для привлечения внимания (по желанию) */
+@keyframes pulse-eye {
+    0% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(var(--primary-color-rgb, 255, 76, 96), 0.7);
+    }
+    50% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 8px rgba(var(--primary-color-rgb, 255, 76, 96), 0);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(var(--primary-color-rgb, 255, 76, 96), 0);
+    }
+}
+
+/* Активация пульсации (можно добавить класс через JS при желании) */
+.views-counter.pulse {
+    animation: pulse-eye 2s infinite;
 }
 
 /* Фон с эффектом наложения - по умолчанию прозрачный */
@@ -1115,59 +1239,6 @@ a {
     color: var(--card-bg);
 }
 
-/* Адаптивность для карточек проектов */
-@media (max-width: 768px) {
-    .project-card .project-img {
-        height: 180px;
-    }
-    
-    .project-card .project-logo {
-        width: 100px;
-        height: 100px;
-    }
-    
-    .project-card .project-info {
-        padding: 20px;
-    }
-    
-    .project-card .project-title {
-        font-size: 1.2rem;
-    }
-    
-    .project-card .project-description {
-        font-size: 0.9rem;
-    }
-    
-    .project-card .team-title {
-        font-size: 1rem;
-    }
-    
-    .project-card .team-members {
-        gap: 5px;
-    }
-    
-    .project-card .team-member {
-        font-size: 0.75rem;
-        padding: 4px 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .project-card .project-tags {
-        gap: 6px;
-    }
-    
-    .project-card .project-tags span {
-        font-size: 0.7rem;
-        padding: 4px 10px;
-    }
-    
-    .project-card .btn-small {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-}
-
 /* Стили для кликабельных членов команды */
 .project-card .team-member {
     background-color: rgba(255, 255, 255, 0.1);
@@ -1291,6 +1362,61 @@ a {
     
     .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .project-card .project-img {
+        height: 180px;
+    }
+    
+    .project-card .project-logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .project-card .project-info {
+        padding: 20px;
+    }
+    
+    .project-card .project-title {
+        font-size: 1.2rem;
+    }
+    
+    .project-card .project-description {
+        font-size: 0.9rem;
+    }
+    
+    .project-card .team-title {
+        font-size: 1rem;
+    }
+    
+    .project-card .team-members {
+        gap: 5px;
+    }
+    
+    .project-card .team-member {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+
+    .views-counter {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        left: 20px;
+    }
+    
+    .views-counter::before {
+        font-size: 16px;
+    }
+    
+    .views-counter-info {
+        bottom: 50px;
+        min-width: 180px;
+        padding: 10px 14px;
+    }
+    
+    .views-counter-info p {
+        font-size: 0.8rem;
     }
 }
 
@@ -1495,6 +1621,20 @@ a {
 
 /* Дополнительная адаптивность для мобильных устройств */
 @media (max-width: 480px) {
+    .project-card .project-tags {
+        gap: 6px;
+    }
+    
+    .project-card .project-tags span {
+        font-size: 0.7rem;
+        padding: 4px 10px;
+    }
+    
+    .project-card .btn-small {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
   .logo h2 {
       font-size: 14px;
   }
@@ -1645,6 +1785,25 @@ a {
   .theme-switch i,
   #back-to-top i {
       font-size: 16px;
+  }
+
+  .views-counter {
+      width: 40px;
+      height: 40px;
+  }
+
+  .views-counter::before {
+      font-size: 14px;
+  }
+
+  .views-counter-info {
+      bottom: 45px;
+      min-width: 160px;
+      padding: 8px 12px;
+  }
+
+  .views-counter-info p {
+      font-size: 0.75rem;
   }
 }
 
